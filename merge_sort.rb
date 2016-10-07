@@ -1,3 +1,5 @@
+require 'pry'
+
 class MergeSort
     def sort(unsorted_list)
         unsorted_list_downloop = []
@@ -24,26 +26,30 @@ class MergeSort
         end
         unsorted_list_downloop = sorted_list
         sorted_list = []
-        (0..unsorted_list_downloop.size-2).each do |position|
+        while unsorted_list_downloop.size > 1
             sorted_list << []
-            temp_first_list = unsorted_list_downloop[position]
-            temp_second_list = unsorted_list_downloop[position + 1]
+            temp_first_list = unsorted_list_downloop[0]
+            temp_second_list = unsorted_list_downloop[1]
             while (temp_first_list.size > 0) and (temp_second_list.size > 0)
                     if temp_first_list[0] <= temp_second_list[0]
-                        sorted_list[position] << temp_first_list[0]
+                        sorted_list[0] << temp_first_list[0]
                         temp_first_list.shift
                     else
-                        sorted_list[position] << temp_second_list[0]
+                        sorted_list[0] << temp_second_list[0]
                         temp_second_list.shift
                     end
             end
-            if temp_first_list.size > 0
-                sorted_list[position] << temp_first_list[0]
+            while temp_first_list.size > 0
+                sorted_list[0] << temp_first_list[0]
                 temp_first_list.shift
             end
-            if temp_second_list.size > 0
-                sorted_list[position] << temp_second_list[0]
+            while temp_second_list.size > 0
+                sorted_list[0] << temp_second_list[0]
                 temp_second_list.shift
+            end
+            while (unsorted_list_downloop[0].size == 0) and (unsorted_list_downloop.size > 1)
+                #binding.pry
+                unsorted_list_downloop.shift
             end
         end
 
